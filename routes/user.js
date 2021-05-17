@@ -4,7 +4,7 @@ const { body, validationResult } = require("express-validator");
 
 const router = express.Router();
 
-const Users = require("../models/Users");
+const User = require("../models/User");
 
 // @route       POST        api/users
 // @desc        Registers a users
@@ -28,13 +28,13 @@ router.post(
 		const { name, email, password } = req.body;
 
 		try {
-			let users = await Users.findOne({ email });
+			let user = await User.findOne({ email });
 
-			if (users) {
+			if (user) {
 				return res.status(400).json({ msg: "User already exists" });
 			}
 
-			users = new Users({
+			user = new User({
 				name,
 				email,
 				password,
@@ -42,10 +42,10 @@ router.post(
 
 			const salt = await bcrypt.genSalt(10);
 
-			users.password = await bcrypt.hash(password, salt);
+			user.password = await bcrypt.hash(password, salt);
 
-			//TO SAVE IN DATABASE
-			await users.save();
+			//TO SAVE USER IN DATABASE
+			await user.save();
 
 			res.send("User saved");
 		} catch (err) {
