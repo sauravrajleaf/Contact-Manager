@@ -1,14 +1,14 @@
-const bcrypt = require("bcryptjs");
 const express = require("express");
 const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const config = require("config");
 const router = express.Router();
 
 const User = require("../models/User");
 
 // @route       POST        api/user
-// @desc        Registers a user
+// @desc        Registers a new user and returns a unique jwt token
 // @access      Public
 router.post(
 	"/",
