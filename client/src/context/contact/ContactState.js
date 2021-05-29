@@ -39,6 +39,7 @@ const ContactState = (props) => {
         type: "professional",
       },
     ],
+    current: null,
   };
 
   //State allows us to access anything in state
@@ -57,11 +58,18 @@ const ContactState = (props) => {
   };
 
   //SET CURRENT CONTACT
+  const setCurrent = (contact) => {
+    dispatch({ type: SET_CURRENT, payload: contact });
+  };
 
   //CLEAR CURRNET CONTACT
-
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT });
+  };
   //UPDATE CONTACT
-
+  const updateContact = (contact) => {
+    dispatch({ type: UPDATE_CONTACT, payload: contact });
+  };
   //FILTER CONTACTS
 
   //CLEAR FILTERS
@@ -70,8 +78,12 @@ const ContactState = (props) => {
     <contactContext.Provider
       value={{
         contacts: state.contacts,
+        current: state.current,
         addContact,
         deleteContact,
+        setCurrent,
+        clearCurrent,
+        updateContact,
       }}
     >
       {props.children}
