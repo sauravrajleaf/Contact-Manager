@@ -1,5 +1,6 @@
 import React, { useReducer, useContext } from "react";
 import { v4 as uuid } from "uuid";
+import axios from "axios";
 
 import AuthContext from "./authContext";
 import authReducer from "./authReducer";
@@ -31,14 +32,42 @@ const AuthState = (props) => {
   //ACTIONS
 
   //LOAD USER - WHICH IS GOING TO TAKE CARE OF WHICH USER IS LOGGED AND ITS GOING TO HIT THAT AUTH ENDPOINT AND GET THE USER DATA
+  const loadUser = () => console.log("load user");
 
   //REGISTER USER - WHICH SIGNS THE USER UP AND GETS A TOKEN BACK
+  const register = async (formData) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.post("api/user", formData, config);
+
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: REGISTER_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
 
   //LOGIN USER - WHICH WILL LOG THE USER IN AND GET THE TOKEN
+  const login = () => console.log("login user");
 
   //LOGOUT - WHICH WILL DESTROY THE TOKEN AND JUST CLEAR EVERYTHIN UP
+  const logout = () => console.log("logoun user");
 
   //CLEAR_ERRORS - TO CLEAR OUT ANY ERRORS IN THE STATE
+  const clearErrors = () =>
+    dispatch({
+      type: CLEAR_ERRORS,
+    });
 
   //BY SURROUNDING THE COMPONENT IN THE SPECIFIC PROVIDER TAGS WE GET ACCESS TO THE STATE AND FUCNTIONS OF THE PROVIDER
   return (
@@ -49,6 +78,11 @@ const AuthState = (props) => {
         loading: state.loading,
         user: state.user,
         error: state.error,
+        register,
+        loadUser,
+        login,
+        logout,
+        clearErrors,
       }}
     >
       {props.children}
