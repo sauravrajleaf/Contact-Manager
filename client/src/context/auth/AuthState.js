@@ -78,10 +78,31 @@ const AuthState = (props) => {
   };
 
   //LOGIN USER - WHICH WILL LOG THE USER IN AND GET THE TOKEN
-  const login = () => console.log("login user");
+  const login = async (formData) => {
+    const config = {
+      headers: {
+        "Content-Types": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.post("/api/auth", formData, config);
+
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data,
+      });
+      loadUser();
+    } catch (err) {
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
 
   //LOGOUT - WHICH WILL DESTROY THE TOKEN AND JUST CLEAR EVERYTHIN UP
-  const logout = () => console.log("logoun user");
+  const logout = () => console.log("logout user");
 
   //CLEAR_ERRORS - TO CLEAR OUT ANY ERRORS IN THE STATE
   const clearErrors = () =>
