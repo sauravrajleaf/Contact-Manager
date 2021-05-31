@@ -11,6 +11,13 @@ import {
 
 const authReducer = (state, action) => {
   switch (action.type) {
+    case USER_LOADED:
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        user: action.payload,
+      };
     case CLEAR_ERRORS:
       return {
         ...state,
@@ -21,10 +28,11 @@ const authReducer = (state, action) => {
       return {
         ...state,
         ...action.payload,
-        isAuthentiaced: true,
+        isAuthenticated: true,
         loading: false,
       };
     case REGISTER_FAIL:
+    case AUTH_ERROR:
       localStorage.removeItem("token");
       return {
         ...state,
