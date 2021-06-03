@@ -7,7 +7,7 @@ export const UPDATE_CONTACT = "UPDATE_CONTACT";
 export const CLEAR_CURRENT = "CLEAR_CURRENT";
 export const FILTER_CONTACTS = "FILTER_CONTACTS";
 export const CLEAR_FILTER = "CLEAR_FILTER";
-
+export const CONTACT_ERROR = "CONTACT_ERROR";
 //auth context types
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
