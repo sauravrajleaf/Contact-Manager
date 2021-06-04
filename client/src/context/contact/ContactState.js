@@ -1,5 +1,4 @@
 import React, { useReducer } from "react";
-import { v4 as uuid } from "uuid";
 import axios from "axios";
 
 import contactContext from "./contactContext";
@@ -14,12 +13,14 @@ import {
   FILTER_CONTACTS,
   CLEAR_FILTER,
   CONTACT_ERROR,
+  GET_CONTACTS,
+  CLEAR_CONTACTS,
 } from "../types";
 
 //  CREATE INITIAL STATE
 const ContactState = (props) => {
   const initialState = {
-    contacts: [],
+    contacts: null,
     current: null,
     filtered: null,
     error: null,
@@ -28,6 +29,16 @@ const ContactState = (props) => {
   //State allows us to access anything in state
   //Dispatch allows us to dispatch objects to the Reducer
   const [state, dispatch] = useReducer(contactReducer, initialState);
+
+  //GET CONTACTS
+  const getContacts = async () => {
+    try {
+      const res = await axios.get("/api/contacts");
+      dispatch({ type: GET_CONTACTS, payload: res.data });
+    } catch (err) {
+      dispatch({ type: CONTACT_ERROR, payload: err.response.msg });
+    }
+  };
 
   //ADD CONTACT
   const addContact = async (contact) => {
@@ -74,6 +85,10 @@ const ContactState = (props) => {
     dispatch({ type: CLEAR_FILTER });
   };
 
+  const clearContacts = () => {
+    dispatch({ type: CLEAR_CONTACTS });
+  };
+
   return (
     <contactContext.Provider
       value={{
@@ -88,6 +103,8 @@ const ContactState = (props) => {
         updateContact,
         filterContacts,
         clearFilter,
+        getContacts,
+        clearContacts,
       }}
     >
       {props.children}
