@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import AuthContext from "../../context/auth/authContext";
@@ -8,7 +8,7 @@ const Navbar = () => {
   const authContext = useContext(AuthContext);
   const contactContext = useContext(ContactContext);
 
-  const { isAuthenticated, logout, user } = authContext;
+  const { isAuthenticated, logout, user, loadUser } = authContext;
   const { clearContacts } = contactContext;
 
   const onLogout = () => {

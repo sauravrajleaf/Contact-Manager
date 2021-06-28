@@ -34,9 +34,8 @@ const AuthState = (props) => {
   //LOAD USER - WHICH IS GOING TO TAKE CARE OF WHICH USER IS LOGGED AND ITS GOING TO HIT THAT AUTH ENDPOINT AND GET THE USER DATA
   const loadUser = async () => {
     // LOAD TOKEN INTO GLOBAL HEADERS
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
+
+    setAuthToken(localStorage.token);
 
     try {
       const res = await axios.get("/api/auth");
