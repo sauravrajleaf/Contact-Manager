@@ -1,14 +1,19 @@
-import React from "react" ;
+import React, { useContext, useEffect } from "react";
 
-const About = () =>{
-    return (
-        <div>
-            <h1>
-                About
-            </h1>
-        </div>
-    )
+import AuthContext from "../../context/auth/authContext";
 
-}
+const About = () => {
+	const authContext = useContext(AuthContext);
+	useEffect(() => {
+		authContext.loadUser();
 
-export default About ; 
+		//eslint-disable-next-line
+	});
+	return (
+		<div>
+			<h1>About</h1>
+		</div>
+	);
+};
+
+export default About;

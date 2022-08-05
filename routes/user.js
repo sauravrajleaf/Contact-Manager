@@ -7,6 +7,8 @@ const router = express.Router();
 
 const User = require("../models/User");
 
+require("dotenv").config();
+
 // @route       POST        api/user
 // @desc        Registers a new user and returns a unique jwt token
 // @access      Public
@@ -56,7 +58,7 @@ router.post(
 
 			jwt.sign(
 				payload,
-				config.get("jwtSecret"),
+				process.env.jwtSecret,
 				{
 					expiresIn: 3600000,
 				},
