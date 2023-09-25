@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb://saurav:sauravraj@contactmanager-shard-00-00.jkdke.mongodb.net:27017,contactmanager-shard-00-01.jkdke.mongodb.net:27017,contactmanager-shard-00-02.jkdke.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-alv0zl-shard-0&authSource=admin&retryWrites=true&w=majority",
+  "jwtSecret": "secret"
+}
