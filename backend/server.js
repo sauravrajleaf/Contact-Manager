@@ -14,7 +14,7 @@ app.all('*', (req, res, next) => {
 		'Access-Control-Allow-Origin',
 		'https://localhost:3000',
 		'http://localhost:5000/',
-		'https://movies-library-website-front.onrender.com'
+		'https://contact-manager-ka15.onrender.com/'
 	);
 	next();
 });
